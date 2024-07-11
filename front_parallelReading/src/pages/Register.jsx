@@ -1,6 +1,7 @@
 // Register.js
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Register.css";
 
@@ -8,7 +9,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-
+  const nav = useNavigate();
   const handleRegister = async () => {
     try {
       const response = await axios.post("http://127.0.0.1:8000/accounts/", {
@@ -16,10 +17,9 @@ const Register = () => {
         password1: password1,
         password2: password2,
       });
-      setEmail("");
-      setPassword1("");
-      setPassword2("");
-      console.log("회원가입 성공 💙💙");
+
+      alert("회원가입 성공 💙💙");
+      nav("/");
       // 토큰을 localStorage에 저장할 수 있습니다.
     } catch (error) {
       if (password1 !== password2) {

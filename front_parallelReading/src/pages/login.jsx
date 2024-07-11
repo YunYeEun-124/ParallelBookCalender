@@ -4,13 +4,17 @@
  * 2. 틀리면 알람창 뜨도록
  */
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/login.css";
 
 const Login = () => {
+  //states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useNavigate();
 
+  //event handler
   const handleLogin = async () => {
     try {
       const response = await axios.post(
@@ -20,11 +24,8 @@ const Login = () => {
           password: password,
         }
       );
-      console.log("로그인 성공 🐛🐛");
-      setEmail("");
-      setPassword("");
-
-      // 토큰을 localStorage에 저장할 수 있습니다.
+      alert("로그인 성공 🐛🐛");
+      nav("/calender");
     } catch (error) {
       if (email == "" || password == "") {
         alert("빈 칸 채우세요");
@@ -53,6 +54,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
+      <Link to="/register">signup</Link>
     </div>
   );
 };
