@@ -13,7 +13,13 @@ class Book(models.Model):
     done = models.BooleanField(default = False) #완독은 트루, 아니면 false
     created_date = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now=True)
-    comments = models.JSONField(default=dict)
 
     def __str__(self):
         return self.title
+    
+class Comments(models.Model):
+    book = models.ForeignKey(Book,related_name='comments',on_delete=models.CASCADE)
+    comment = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return self.comment

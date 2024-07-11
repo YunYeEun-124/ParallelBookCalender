@@ -14,7 +14,7 @@ class BookViewSet(ModelViewSet):
     def get_queryset(self):
         user_pk = self.request.query_params.get('pk',None)
         if user_pk is not None :
-          return Book.objects.filter(user_id=user_pk)
+          return Book.objects.filter(user_id=user_pk )
         return super().get_queryset()
 
     def perform_create(self, serializer):
